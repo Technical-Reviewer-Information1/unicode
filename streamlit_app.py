@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 # タイトルとクレジット
-st.title("🔤 文字のデジタル表現を学ぶ")
+st.title("🔤 文字のデジタル表現")
 st.caption("Created by Dit-Lab.(Daiki ITO)")
 st.caption("Supported by Tomoaki ATSUMI")
 
