@@ -213,10 +213,10 @@ st.subheader("🔄 ビットとバイトの関係")
 st.write("1バイト = 8ビット")
 
 # 視覚的な表現
-bits_visual = "| " + " | ".join([f"bit{i+1}" for i in range(8)]) + " |"
+bits_visual = "| " + " | ".join([f"bit{8-i}" for i in range(8)]) + " |"
 st.code(bits_visual, language=None)
 st.code("|  1  |  0  |  1  |  1  |  0  |  0  |  1  |  0  |", language=None)
-st.write("↑ これで1バイト")
+st.write("↑ これで1バイト（右から左へ: bit1→bit8）")
 
 # 4. まとめと関連情報
 st.markdown("---")
