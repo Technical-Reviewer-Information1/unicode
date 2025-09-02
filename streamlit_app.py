@@ -213,9 +213,10 @@ st.subheader("🔄 ビットとバイトの関係")
 st.write("1バイト = 8ビット")
 
 # 視覚的な表現
-bits_visual = "| " + " | ".join([f"bit{8-i}" for i in range(8)]) + " |"
-st.code(bits_visual, language=None)
-st.code("|  1  |  0  |  1  |  1  |  0  |  0  |  1  |  0  |", language=None)
+example_byte = "10110010"
+bit_data = {f"bit{i+1}": [int(example_byte[7-i])] for i in range(8)}
+df_bits = pd.DataFrame(bit_data)
+st.dataframe(df_bits, hide_index=True)
 st.write("↑ これで1バイト（右から左へ: bit1→bit8）")
 
 # 4. まとめと関連情報
