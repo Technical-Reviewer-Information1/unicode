@@ -214,7 +214,7 @@ st.write("1バイト = 8ビット")
 
 # 視覚的な表現
 example_byte = "10110010"
-bit_data = {f"Bit{i+1}": [int(example_byte[7-i])] for i in range(8)}
+bit_data = {f"Bit{8-i}": [int(example_byte[i])] for i in range(8)}
 df_bits = pd.DataFrame(bit_data)
 st.dataframe(df_bits, hide_index=True)
 st.write("↑ これで1バイト（右から左へ: Bit1→Bit8）こうではなく、10110010このようにと表示されるようにして下さい")
