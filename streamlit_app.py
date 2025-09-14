@@ -3,13 +3,13 @@ import pandas as pd
 
 # アプリのページ設定
 st.set_page_config(
-    page_title="文字のデジタル表現を学ぶ",
+    page_title="文字のデジタル表現",
     page_icon="🔤",
     layout="wide"
 )
 
 # タイトルとクレジット
-st.title("🔤 文字のデジタル表現")
+st.title("文字のデジタル表現（pp.151-154）")
 st.caption("Created by Dit-Lab.(Daiki ITO)")
 st.caption("Supported by Tomoaki ATSUMI")
 
