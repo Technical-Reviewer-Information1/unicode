@@ -1,0 +1,109 @@
+  <section class="step" id="step1">
+    <h2><span class="no">STEP 1</span>ASCIIコード表を引く</h2>
+    <p class="desc">7ビットを<strong>上位3ビット（列）</strong>と<strong>下位4ビット（行）</strong>に分けて、交わったところの文字を読みます。表のマスを押すと詳しく出ます。</p>
+    <div class="panel">
+      <div class="btn-row" style="align-items:flex-end;flex-wrap:wrap;gap:10px">
+        <label class="fld" for="binIn">7ビットの文字コード<br>
+          <input type="text" id="binIn" value="1000111" class="mono" maxlength="7" style="width:9em"></label>
+        <button class="btn" data-bin="1000111">1000111（本文【ア】）</button>
+        <button class="btn" data-bin="1000001">1000001</button>
+        <button class="btn" data-bin="0110000">0110000</button>
+      </div>
+      <div class="note" id="lookNote" style="margin-top:10px"></div>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="ascii" id="asciiTable"></table></div>
+      <p class="small" style="color:var(--muted);margin-top:8px">上位3ビットが 000・001 の32個は、改行やタブなど画面に出ない<strong>制御文字</strong>です（表では省略）。</p>
+    </div>
+  </section>
+
+  <section class="step" id="step2">
+    <h2><span class="no">STEP 2</span>文字列を文字コードに直す</h2>
+    <p class="desc">半角の英数字・記号を入れると、1文字ずつ ASCII コードに直します。本文の「Dec.」を確かめましょう。</p>
+    <div class="panel">
+      <div class="btn-row" style="align-items:flex-end;flex-wrap:wrap;gap:10px">
+        <label class="fld" for="strIn">文字列（半角）<br>
+          <input type="text" id="strIn" value="Dec." class="mono" style="width:16em"></label>
+        <button class="btn" data-str="Dec.">Dec.</button>
+        <button class="btn" data-str="Joho1">Joho1</button>
+        <button class="btn" data-str="A a 0">A a 0</button>
+      </div>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="tbl" id="codeTable"></table></div>
+      <div class="metrics" style="margin-top:12px">
+        <div class="metric"><div class="k">文字数</div><div class="v" id="cCount">—</div></div>
+        <div class="metric"><div class="k">7ビットで表すと</div><div class="v" id="cBits7">—</div></div>
+        <div class="metric"><div class="k">1文字1バイトで表すと</div><div class="v" id="cBytes">—</div></div>
+      </div>
+      <div class="note" id="codeNote" style="margin-top:10px"></div>
+      <hr class="sep">
+      <p class="qhead">逆向きに読む</p>
+      <div class="btn-row" style="align-items:flex-end;flex-wrap:wrap;gap:10px">
+        <label class="fld" for="hexIn">16進法のコード（空白区切り）<br>
+          <input type="text" id="hexIn" value="44 65 63 2E" class="mono" style="width:16em"></label>
+      </div>
+      <div class="note info" id="hexNote" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <section class="step" id="step3">
+    <h2><span class="no">STEP 3</span>日本語はUTF-8で何バイトになるか</h2>
+    <p class="desc">ASCIIでは足りないので、世界中の文字を集めた <strong>Unicode</strong> が作られました。その表し方の1つが UTF-8 です。</p>
+    <div class="panel">
+      <div class="btn-row" style="align-items:flex-end;flex-wrap:wrap;gap:10px">
+        <label class="fld" for="u8In">文字列<br>
+          <input type="text" id="u8In" value="文字" style="width:16em"></label>
+        <button class="btn" data-u8="文字">文字（本文）</button>
+        <button class="btn" data-u8="情報Ⅰ">情報Ⅰ</button>
+        <button class="btn" data-u8="Aあ漢🎌">Aあ漢🎌</button>
+      </div>
+      <div class="bytes" id="u8Box"></div>
+      <div class="metrics" style="margin-top:12px">
+        <div class="metric"><div class="k">文字数</div><div class="v" id="u8Chars">—</div></div>
+        <div class="metric"><div class="k">合計バイト数</div><div class="v" id="u8Bytes">—</div></div>
+        <div class="metric"><div class="k">合計ビット数</div><div class="v" id="u8Bits">—</div></div>
+      </div>
+      <div class="note" id="u8Note" style="margin-top:10px"></div>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="tbl" id="u8Rule"></table></div>
+    </div>
+  </section>
+
+  <section class="step" id="step4">
+    <h2><span class="no">STEP 4</span>文字化けを起こしてみる</h2>
+    <p class="desc">同じバイト列でも、<strong>読み方（エンコーディング）を取り違える</strong>と別の文字になります。実際に起こしてみましょう。</p>
+    <div class="panel">
+      <div class="btn-row" style="align-items:flex-end;flex-wrap:wrap;gap:10px">
+        <label class="fld" for="mjIn">UTF-8 で書いた文字列<br>
+          <input type="text" id="mjIn" value="文字化けの実験" style="width:18em"></label>
+        <button class="btn" data-mj="文字化けの実験">文字化けの実験</button>
+        <button class="btn" data-mj="情報Ⅰ">情報Ⅰ</button>
+        <button class="btn" data-mj="Hello">Hello</button>
+      </div>
+      <div class="note info" style="margin-top:10px">送られたバイト列（16進法）：<span class="mono" id="mjHex"></span></div>
+      <div id="mjBox" style="margin-top:10px"></div>
+      <div class="note" id="mjNote" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <section class="step" id="step5">
+    <h2><span class="no">STEP 5</span>本文の空欄【ア】〜【オ】を確かめる</h2>
+    <p class="desc">STEP 1〜4 で確かめたことをもとに答えましょう。</p>
+    <div class="panel" id="blankBox"></div>
+    <div class="note" id="blankNote" style="margin-top:10px"></div>
+  </section>
+
+  <section class="step" id="glossary">
+    <h2><span class="no">用語</span>この節で出てくることば</h2>
+    <div class="panel"><div id="glossBox"></div></div>
+  </section>
+
+  <section class="step" id="wrap">
+    <h2><span class="no">まとめ</span>おさえておきたいこと</h2>
+    <div class="panel">
+      <ul class="bullets">
+        <li>文字に割り当てた数値が<strong>文字コード</strong>、その対応関係の決まりが<strong>文字コード体系</strong>。</li>
+        <li><strong>ASCII</strong>は7ビット（2<sup>7</sup>＝128種類）。上位3ビットと下位4ビットで表を引く。0〜31は制御文字。</li>
+        <li>各国が独自に拡張した結果、互いに互換性がなくなり<strong>文字化け</strong>が起きるようになった。</li>
+        <li>これを解決するために作られた世界共通の体系が<strong>Unicode</strong>。その符号化方式の1つが<strong>UTF-8</strong>。</li>
+        <li>UTF-8では、半角英数字は1バイト、日本語の多くは3バイト。16進法1桁＝4ビットなので、6桁なら 4×6＝24ビット＝3バイト。</li>
+        <li>文字化けの原因は<strong>読み方（エンコーディング）の取り違え</strong>。データ自体は壊れていないことが多い。</li>
+      </ul>
+    </div>
+  </section>
