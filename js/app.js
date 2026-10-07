@@ -186,5 +186,18 @@
     drawAscii(-1); drawLook(); drawCode(); drawHex(); drawU8(); drawMoji(); drawBlanks();
     window.Terms.attach();
   }
+  if (window.Predict) Predict.make('pdU', {
+    q: '<strong>UTF-8</strong> で漢字1文字は何バイトで表されるでしょう？',
+    type: 'num', unit: 'バイト', placeholder: 'バイト',
+    answer: function () { return 3; },
+    show: function () {
+      return '本文の「文字」は <span class="mono">E69687 E5AD97<sub>(16)</sub></span>。' +
+             '16進法6桁＝24ビット＝<strong>3バイト</strong>が1文字分です。';
+    },
+    why: '「2バイト」と答えたくなるのは、<strong>Shift_JIS が全角2バイト</strong>だからです。' +
+         'UTF-8 は<strong>可変長</strong>で、英数字は1バイト、漢字やひらがなは3バイトになります。' +
+         '同じ文章でも文字コードがちがえばデータ量が変わる、ということです。'
+  });
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
